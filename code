@@ -1,0 +1,26 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+
+file_path = 'data.csv'
+df = pd.read_csv(file_path)
+df['Date'] = pd.to_datetime(df['Date'])
+df.set_index('Date', inplace=True)
+price_data = df['Sales']
+
+def moving_average_detrend(data, window=30):
+    trend = data.rolling(window=window).mean()  
+    detrended = data - trend  
+    return detrended, trend
+detrended_ma, ma_trend = moving_average_detrend(price_data)
+
+plt.figure(figsize=(10, 8))
+plt.subplot(2, 1, 1)
+plt.plot(df.index, price_data, label='orig data')
+plt.plot(df.index, ma_trend, label='average trend', linestyle='--')
+plt.plot(df.index, detrended_ma, label='detrended', linestyle='-.')
+plt.title('Detrending')
+plt.legend()
+plt.tight_layout()
+plt.show()
