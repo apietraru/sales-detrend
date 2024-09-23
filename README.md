@@ -12,4 +12,4 @@ This visualization will make it clear how much the trend affects the data and wh
 Code put though anaconda to generate plot
 ![image](https://github.com/user-attachments/assets/9d9b45d1-5b81-48dc-8f4b-85d554da509e)
 
--Ana Pietraru
+-Ana Pietraru 5933889
