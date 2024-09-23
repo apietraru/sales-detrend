@@ -15,12 +15,28 @@ def moving_average_detrend(data, window=30):
     return detrended, trend
 detrended_ma, ma_trend = moving_average_detrend(price_data)
 
+def linear_detrend(data):
+    X = np.arange(len(data)).reshape(-1, 1)
+    model = LinearRegression().fit(X, data)
+    trend = model.predict(X)
+    detrended = data - trend
+    return detrended, trend
+detrended_linear, linear_trend = linear_detrend(price_data)
+
 plt.figure(figsize=(10, 8))
-plt.subplot(2, 1, 1)
+plt.subplot(3, 1, 1)
 plt.plot(df.index, price_data, label='orig data')
 plt.plot(df.index, ma_trend, label='average trend', linestyle='--')
 plt.plot(df.index, detrended_ma, label='detrended', linestyle='-.')
-plt.title('Detrending')
+plt.title('MA. Detrending')
 plt.legend()
+
+plt.subplot(3, 1, 2)
+plt.plot(df.index, price_data, label='orig Data')
+plt.plot(df.index, linear_trend, label='linear Trend', linestyle='--')
+plt.plot(df.index, detrended_linear, label='detrended', linestyle='-.')
+plt.title('Linear Detrending')
+plt.legend()
+
 plt.tight_layout()
 plt.show()
