@@ -44,3 +44,28 @@ plt.legend()
 
 plt.tight_layout()
 plt.show()
+
+
+class TestDetrendingFunctions(unittest.TestCase):
+    def setUp(self):
+        """ set up sample data for testing """
+        self.sample_data = pd.Series([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    
+    def test_moving_average_detrend(self):
+        """ test moving average detrending """
+        detrended, trend = moving_average_detrend(self.sample_data, window=3)
+        # check if right length
+        self.assertEqual(len(detrended), len(self.sample_data))
+        self.assertEqual(len(trend), len(self.sample_data))
+        # Ensure there are no NaN values after detrending (except for the start due to rolling)
+        self.assertFalse(detrended.isnull().all())
+
+    def test_linear_detrend(self):
+        """ test linear regression detrending """
+        detrended, trend = linear_detrend(self.sample_data)
+        # check if right length
+        self.assertEqual(len(detrended), len(self.sample_data))
+        self.assertEqual(len(trend), len(self.sample_data))
+        # check same start
+        self.assertAlmostEqual(trend[0], self.sample_data[0], delta=0.5)
+unittest.main(argv=[''], exit=False)
