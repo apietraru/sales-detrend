@@ -3,18 +3,21 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 
+# Load the data
 file_path = 'data.csv'
 df = pd.read_csv(file_path)
 df['Date'] = pd.to_datetime(df['Date'])
 df.set_index('Date', inplace=True)
 price_data = df['Sales']
 
+#remove trend using moving average
 def moving_average_detrend(data, window=30):
     trend = data.rolling(window=window).mean()  
     detrended = data - trend  
     return detrended, trend
 detrended_ma, ma_trend = moving_average_detrend(price_data)
 
+#remove trend using linear regression
 def linear_detrend(data):
     X = np.arange(len(data)).reshape(-1, 1)
     model = LinearRegression().fit(X, data)
@@ -23,6 +26,7 @@ def linear_detrend(data):
     return detrended, trend
 detrended_linear, linear_trend = linear_detrend(price_data)
 
+#plot original data and detrended data
 plt.figure(figsize=(10, 8))
 plt.subplot(3, 1, 1)
 plt.plot(df.index, price_data, label='orig data')
