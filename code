@@ -22,6 +22,9 @@ def linear_detrend(data):
     X = np.arange(len(data)).reshape(-1, 1)
     model = LinearRegression().fit(X, data)
     trend = model.predict(X)
+ # Adjust the trend so that the first value matches the first value of the data
+    adjustment = data.iloc[0] - trend[0]
+    trend = trend + adjustment  # Shift the trend up or down
     detrended = data - trend
     return detrended, trend
 detrended_linear, linear_trend = linear_detrend(price_data)
