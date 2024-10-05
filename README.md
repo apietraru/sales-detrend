@@ -9,8 +9,5 @@ iii.Data needed: csv file with date and prices
 iv.The project will produce a plot showing: the original data (daily prices),the moving average trend, the detrended data
 This visualization will make it clear how much the trend affects the data and what remains when the trend is removed, helping in understanding the natural variations in the dataset
 
-Code put though anaconda to generate plot
-![image](https://github.com/user-attachments/assets/97b849ab-8b5a-4a20-96b4-88df27076af8)
-
 
 -Ana Pietraru 5933889
