@@ -19,7 +19,7 @@ dependencies = [
 ]
 license = { text = "MIT" }
 readme = "README.md" 
-aditional information = "extra.md"
+aditional_information = "extra.md"
 
 
 [tool.pytest.ini_options]
