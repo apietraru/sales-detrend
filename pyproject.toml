@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sales_detrend"
+version = "1.0"
+description = "A project to perform moving average and linear detrending of time series data."
+authors = [
+    { name = "Ana Pietraru", email = "anapietraru@gmail.com" }
+]
+dependencies = [
+    "pandas",
+    "numpy",
+    "matplotlib",
+    "scikit-learn",
+    "pytest",
+    "unittest"
+]
+license = { text = "MIT" }
+readme = "README.md" 
+aditional information = "extra.md"
+
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q"
+testpaths = [
+    "test_file.py"
+]
